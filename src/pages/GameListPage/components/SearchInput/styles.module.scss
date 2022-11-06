@@ -1,0 +1,13 @@
+@use 'utils/variables';
+
+.input {
+	min-width: 300px;
+	padding: 10px;
+	outline: none;
+	border-radius: 12px;
+	border: 1px solid variables.$Blue;
+
+	&::placeholder {
+		color: variables.$Black;
+	}
+}

@@ -1,0 +1,31 @@
+@use 'utils/variables';
+
+.container {
+	max-width: 300px;
+	width: 100%;
+	aspect-ratio: 1/1;
+
+	.image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		border-radius: 12px;
+	}
+
+	.title {
+		margin-top: 8px;
+		font-size: 20px;
+		font-weight: 600;
+	}
+
+	.playButton {
+		padding: 8px 30px;
+		margin-top: 8px;
+		border-radius: 20px;
+		font-size: 16px;
+		border: none;
+		cursor: pointer;
+		color: variables.$White;
+		background-color: variables.$Blue;
+	}
+}
