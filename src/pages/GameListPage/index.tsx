@@ -34,7 +34,7 @@ export const GameListPage = () => {
 				<SearchInput onSearchChange={handleSearchChange} />
 				<Pagination
 					totalItemsCount={games.length}
-					itemsPerPage={30}
+					itemsPerPage={GAMES_PER_PAGE_COUNT}
 					currentPage={currentPage}
 					loading={loadingGames}
 					onPageChange={handleCurrentPageChange}
