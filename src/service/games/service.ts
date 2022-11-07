@@ -1,7 +1,7 @@
 import { $publicApi, getGamesRoute, getProvidersRoute } from '../api';
-import { Game, Provider } from './models';
+import { Provider, ServerGame } from './models';
 
-export const fetchGamesCall = async (): Promise<Game[]> => {
+export const fetchGamesCall = async (): Promise<ServerGame> => {
 	return await (
 		await $publicApi.get(getGamesRoute())
 	).data;

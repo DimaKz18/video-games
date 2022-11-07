@@ -1,15 +1,21 @@
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import styles from './styles.module.scss';
 
 type Props = {
 	title: string;
-	src: string;
+	demo: string;
 };
 
-export const GameItem = memo(({ title, src }: Props) => {
+export const GameItem = memo(({ title, demo }: Props) => {
 	const { t } = useTranslation();
+	const navigate = useNavigate();
+
+	const onPlayClick = () => {
+		navigate(`/games/${title}`);
+	};
 
 	return (
 		<motion.div
@@ -20,9 +26,11 @@ export const GameItem = memo(({ title, src }: Props) => {
 			transition={{ duration: 0.3 }}
 			className={styles.container}
 		>
-			<img alt={title} src={src} className={styles.image} />
+			<img alt={title} src={demo} className={styles.image} />
 			<p className={styles.title}>{title}</p>
-			<button className={styles.playButton}>{t('game_list_play_button')}</button>
+			<button className={styles.playButton} onClick={onPlayClick}>
+				{t('game_list_play_button')}
+			</button>
 		</motion.div>
 	);
 });
