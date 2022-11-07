@@ -10,8 +10,10 @@ export type GamesContextType = {
 	providers: Provider[];
 	searchQuery: string;
 	selectedProvider: ProviderOption | null;
+	currentPage: number;
 	loadingGames: boolean;
 	loadingProviders: boolean;
 	handleSearchChange: (query: string) => void;
 	handleProviderChange: (provider: ProviderOption | null) => void;
+	handleCurrentPageChange: (page: number) => void;
 };

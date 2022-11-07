@@ -10,10 +10,12 @@ const initialContext: GamesContextType = {
 	providers: [],
 	searchQuery: '',
 	selectedProvider: null,
+	currentPage: 1,
 	loadingGames: false,
 	loadingProviders: false,
 	handleSearchChange: () => {},
 	handleProviderChange: () => {},
+	handleCurrentPageChange: () => {},
 };
 
 const GamesContext = createContext(initialContext);
@@ -23,6 +25,7 @@ export const useGames = (): GamesContextType => useContext(GamesContext);
 export const GamesContextProvider = ({ children }: GamesContextProviderProps) => {
 	const [searchQuery, setSearchQuery] = useState('');
 	const [selectedProvider, setSelectedProvider] = useState<ProviderOption | null>(null);
+	const [currentPage, setCurrentPage] = useState(1);
 
 	const gamesQuery = useQuery(['games'], fetchGamesCall, {
 		staleTime: 60000,
@@ -31,12 +34,10 @@ export const GamesContextProvider = ({ children }: GamesContextProviderProps) =>
 		staleTime: 60000,
 	});
 
-	const modifiedGames = Object.entries(gamesQuery.data || [])
-		.map((game) => ({
-			...game[1],
-			gameId: game[0],
-		}))
-		.slice(0, 60);
+	const modifiedGames = Object.entries(gamesQuery.data || []).map((game) => ({
+		...game[1],
+		gameId: game[0],
+	}));
 
 	const handleSearchChange = useCallback((query: string) => {
 		setSearchQuery(query);
@@ -50,15 +51,21 @@ export const GamesContextProvider = ({ children }: GamesContextProviderProps) =>
 		setSelectedProvider(provider);
 	}, []);
 
+	const handleCurrentPageChange = useCallback((page: number) => {
+		setCurrentPage(page);
+	}, []);
+
 	const contextValue = {
 		games: modifiedGames,
 		providers: providersQuery.data || [],
 		searchQuery,
 		selectedProvider,
+		currentPage,
 		loadingGames: gamesQuery.isLoading,
 		loadingProviders: providersQuery.isLoading,
 		handleSearchChange: handleDebouncedSearchChange,
-		handleProviderChange: handleProviderChange,
+		handleProviderChange,
+		handleCurrentPageChange,
 	};
 
 	return <GamesContext.Provider value={contextValue}>{children}</GamesContext.Provider>;

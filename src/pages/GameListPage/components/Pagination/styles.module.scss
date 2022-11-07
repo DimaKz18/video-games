@@ -1,0 +1,70 @@
+@use 'utils/variables';
+
+.container {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	list-style-type: none;
+
+	.paginationItem {
+		display: flex;
+		align-items: center;
+		height: 32px;
+		min-width: 32px;
+		padding: 0 12px;
+		margin: auto 4px;
+		border-radius: 16px;
+		font-size: 14px;
+		color: variables.$Black;
+
+		&:hover {
+			cursor: pointer;
+			background-color: variables.$Grey;
+		}
+	}
+
+	.arrow {
+		&::before {
+			position: relative;
+			content: '';
+			display: inline-block;
+			width: 6px;
+			height: 6px;
+			border-right: 0.12em solid variables.$Black;
+			border-top: 0.12em solid variables.$Black;
+		}
+	}
+
+	.leftArrow {
+		transform: rotate(-135deg) translate(-50%);
+	}
+
+	.rightArrow {
+		transform: rotate(45deg);
+	}
+
+	.selectedPage {
+		background-color: variables.$Grey;
+	}
+
+	.dots {
+		&:hover {
+			background-color: transparent;
+			cursor: default;
+		}
+	}
+
+	.disabledPagination {
+		pointer-events: none;
+
+		.arrow::before {
+			border-right: 0.12em solid variables.$DisabledBlack;
+			border-top: 0.12em solid variables.$DisabledBlack;
+		}
+
+		&:hover {
+			background-color: transparent;
+			cursor: default;
+		}
+	}
+}
