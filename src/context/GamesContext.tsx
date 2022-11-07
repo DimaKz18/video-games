@@ -31,9 +31,12 @@ export const GamesContextProvider = ({ children }: GamesContextProviderProps) =>
 		staleTime: 60000,
 	});
 
-	const modifiedGames = Object.entries(gamesQuery.data || []).map((game) => ({
-		...game[1],
-	}));
+	const modifiedGames = Object.entries(gamesQuery.data || [])
+		.map((game) => ({
+			...game[1],
+			gameId: game[0],
+		}))
+		.slice(0, 60);
 
 	const handleSearchChange = useCallback((query: string) => {
 		setSearchQuery(query);
@@ -48,7 +51,7 @@ export const GamesContextProvider = ({ children }: GamesContextProviderProps) =>
 	}, []);
 
 	const contextValue = {
-		games: modifiedGames.slice(0, 60),
+		games: modifiedGames,
 		providers: providersQuery.data || [],
 		searchQuery,
 		selectedProvider,

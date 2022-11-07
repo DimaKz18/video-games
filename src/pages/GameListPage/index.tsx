@@ -1,6 +1,5 @@
 import { useGames } from 'context/GamesContext';
 import { useFilteredGames, useSearchedGames } from 'hooks';
-import { mockedGames } from './helpers';
 import { SearchInput } from './components/SearchInput';
 import { Providers } from './components/Providers';
 import { GameList } from './components/GameList';
@@ -18,7 +17,7 @@ export const GameListPage = () => {
 		handleProviderChange,
 	} = useGames();
 
-	const searchedGames = useSearchedGames(mockedGames, searchQuery);
+	const searchedGames = useSearchedGames(games, searchQuery);
 	const searchedAndFilteredGames = useFilteredGames(
 		searchedGames,
 		selectedProvider?.value

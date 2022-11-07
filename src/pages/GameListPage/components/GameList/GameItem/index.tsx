@@ -6,12 +6,14 @@ import styles from './styles.module.scss';
 
 type Props = {
 	title: string;
-	demo: string;
+	gameId: string;
 };
 
-export const GameItem = memo(({ title, demo }: Props) => {
+export const GameItem = memo(({ title, gameId }: Props) => {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
+
+	const gameSrc = `https://cdn.softswiss.net/i/s3/${gameId}.png`;
 
 	const onPlayClick = () => {
 		navigate(`/games/${title}`);
@@ -26,7 +28,7 @@ export const GameItem = memo(({ title, demo }: Props) => {
 			transition={{ duration: 0.3 }}
 			className={styles.container}
 		>
-			<img alt={title} src={demo} className={styles.image} />
+			<img alt={title} src={gameSrc} className={styles.image} />
 			<p className={styles.title}>{title}</p>
 			<button className={styles.playButton} onClick={onPlayClick}>
 				{t('game_list_play_button')}
