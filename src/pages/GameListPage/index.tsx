@@ -12,6 +12,7 @@ export const GameListPage = () => {
 		games,
 		providers,
 		searchQuery,
+		debouncedSearchQuery,
 		selectedProvider,
 		currentPage,
 		loadingGames,
@@ -22,7 +23,7 @@ export const GameListPage = () => {
 	} = useGames();
 
 	const paginatedGames = usePaginatedGames(games, currentPage, GAMES_PER_PAGE_COUNT);
-	const searchedGames = useSearchedGames(paginatedGames, searchQuery);
+	const searchedGames = useSearchedGames(paginatedGames, debouncedSearchQuery);
 	const searchedAndFilteredGames = useFilteredGames(
 		searchedGames,
 		selectedProvider?.value
@@ -31,7 +32,7 @@ export const GameListPage = () => {
 	return (
 		<div className={styles.container}>
 			<div className={styles.controllersContainer}>
-				<SearchInput onSearchChange={handleSearchChange} />
+				<SearchInput value={searchQuery} onSearchChange={handleSearchChange} />
 				<Pagination
 					totalItemsCount={games.length}
 					itemsPerPage={GAMES_PER_PAGE_COUNT}

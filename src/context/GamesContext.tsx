@@ -1,14 +1,15 @@
-import { createContext, useCallback, useContext, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchGamesCall, fetchProvidersCall } from 'service/games/service';
+import { useDebounce } from 'hooks';
 import { GamesContextProviderProps, GamesContextType } from './types';
 import { ProviderOption } from 'pages/GameListPage/types';
-import { debounce } from 'lodash';
 
 const initialContext: GamesContextType = {
 	games: [],
 	providers: [],
 	searchQuery: '',
+	debouncedSearchQuery: '',
 	selectedProvider: null,
 	currentPage: 1,
 	loadingGames: false,
@@ -38,14 +39,11 @@ export const GamesContextProvider = ({ children }: GamesContextProviderProps) =>
 		...game[1],
 		gameId: game[0],
 	}));
+	const debouncedSearchQuery = useDebounce(searchQuery);
 
 	const handleSearchChange = useCallback((query: string) => {
 		setSearchQuery(query);
 	}, []);
-
-	const handleDebouncedSearchChange = useMemo(() => {
-		return debounce(handleSearchChange, 200);
-	}, [handleSearchChange]);
 
 	const handleProviderChange = useCallback((provider: ProviderOption | null) => {
 		setSelectedProvider(provider);
@@ -59,11 +57,12 @@ export const GamesContextProvider = ({ children }: GamesContextProviderProps) =>
 		games: modifiedGames,
 		providers: providersQuery.data || [],
 		searchQuery,
+		debouncedSearchQuery,
 		selectedProvider,
 		currentPage,
 		loadingGames: gamesQuery.isLoading,
 		loadingProviders: providersQuery.isLoading,
-		handleSearchChange: handleDebouncedSearchChange,
+		handleSearchChange,
 		handleProviderChange,
 		handleCurrentPageChange,
 	};

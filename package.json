@@ -15,7 +15,6 @@
 		"clsx": "^1.2.1",
 		"framer-motion": "^7.6.4",
 		"i18next": "^20.6.1",
-		"lodash.debounce": "^4.0.8",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-i18next": "^11.15.3",
@@ -50,8 +49,5 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
-	},
-	"devDependencies": {
-		"@types/lodash.debounce": "^4.0.7"
 	}
 }

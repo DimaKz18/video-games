@@ -9,6 +9,7 @@ export type GamesContextType = {
 	games: Game[];
 	providers: Provider[];
 	searchQuery: string;
+	debouncedSearchQuery: string;
 	selectedProvider: ProviderOption | null;
 	currentPage: number;
 	loadingGames: boolean;
