@@ -16,7 +16,7 @@ export const GameItem = memo(({ title, gameId }: Props) => {
 	const gameSrc = `https://cdn.softswiss.net/i/s3/${gameId}.png`;
 
 	const onPlayClick = () => {
-		navigate(`/games/${title}`);
+		navigate(`/${gameId}`);
 	};
 
 	return (

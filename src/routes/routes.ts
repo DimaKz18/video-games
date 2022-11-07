@@ -1,4 +1,4 @@
 export const root = '/';
 export const other = '*';
 
-export const currentGame = '/games/:gameId';
+export const currentGame = '/:provider/:title';

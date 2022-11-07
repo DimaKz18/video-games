@@ -1,3 +1,51 @@
+@use 'utils/variables';
+
 .container {
 	padding: 20px;
+
+	.backIcon {
+		&::before {
+			position: relative;
+			content: '';
+			display: inline-block;
+			width: 6px;
+			height: 6px;
+			border-right: 0.12em solid variables.$Black;
+			border-top: 0.12em solid variables.$Black;
+			transform: rotate(-135deg) translate(-50%);
+			cursor: pointer;
+		}
+	}
+
+	.title {
+		margin-top: 40px;
+		font-size: 24px;
+		font-weight: 600;
+		color: variables.$Black;
+	}
+
+	.provider {
+		margin-top: 6px;
+		font-size: 18px;
+		color: variables.$Black;
+	}
+
+	.frame {
+		display: block;
+		margin: 20px auto 0;
+		width: 500px;
+		height: 500px;
+	}
+}
+
+.noResultTitle {
+	margin-top: 30px;
+	text-align: center;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.loader {
+	width: fit-content;
+	margin: 20px auto 0;
 }

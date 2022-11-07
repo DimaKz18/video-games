@@ -22,7 +22,7 @@ export const GameList = memo(({ games, loading }: Props) => {
 	}, [windowSize.width]);
 
 	const hasGame = games.length > 0;
-	const showNoResultsText = !hasGame && !loading;
+	const showNoResultText = !hasGame && !loading;
 
 	const containerStyle = {
 		gridTemplateColumns: `repeat(${itemsPerRow}, auto)`,
@@ -39,8 +39,8 @@ export const GameList = memo(({ games, loading }: Props) => {
 					</AnimatePresence>
 				</motion.div>
 			)}
-			{showNoResultsText && (
-				<p className={styles.noResultsTitle}>{t('game_list_no_games')}</p>
+			{showNoResultText && (
+				<p className={styles.noResultTitle}>{t('game_list_no_games')}</p>
 			)}
 			<Loader show={loading} className={styles.loader} />
 		</>

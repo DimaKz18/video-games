@@ -1,6 +1,8 @@
 {
 	"game_list_search_title": "Search...",
 	"game_list_select_title": "Providers",
-	"game_list_no_games": "No results",
-	"game_list_play_button": "Play"
+	"game_list_no_games": "No result",
+	"game_list_play_button": "Play",
+	
+	"current_game_no_result": "No result"
 }
