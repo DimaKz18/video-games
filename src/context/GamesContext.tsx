@@ -5,21 +5,7 @@ import { useDebounce } from 'hooks';
 import { GamesContextProviderProps, GamesContextType } from './types';
 import { ProviderOption } from 'pages/GameListPage/types';
 
-const initialContext: GamesContextType = {
-	games: [],
-	providers: [],
-	searchQuery: '',
-	debouncedSearchQuery: '',
-	selectedProvider: null,
-	currentPage: 1,
-	loadingGames: false,
-	loadingProviders: false,
-	handleSearchChange: () => {},
-	handleProviderChange: () => {},
-	handleCurrentPageChange: () => {},
-};
-
-const GamesContext = createContext(initialContext);
+const GamesContext = createContext({} as GamesContextType);
 
 export const useGames = (): GamesContextType => useContext(GamesContext);
 

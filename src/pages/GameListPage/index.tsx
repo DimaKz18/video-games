@@ -1,5 +1,5 @@
 import { useGames } from 'context/GamesContext';
-import { usePaginatedGames, useFilteredGames, useSearchedGames } from 'hooks';
+import { useFilteredGames } from 'hooks';
 import { GAMES_PER_PAGE_COUNT } from './helpers';
 import { SearchInput } from './components/SearchInput';
 import { Pagination } from './components/Pagination';
@@ -22,10 +22,11 @@ export const GameListPage = () => {
 		handleCurrentPageChange,
 	} = useGames();
 
-	const paginatedGames = usePaginatedGames(games, currentPage, GAMES_PER_PAGE_COUNT);
-	const searchedGames = useSearchedGames(paginatedGames, debouncedSearchQuery);
-	const searchedAndFilteredGames = useFilteredGames(
-		searchedGames,
+	const filteredGames = useFilteredGames(
+		games,
+		currentPage,
+		GAMES_PER_PAGE_COUNT,
+		debouncedSearchQuery,
 		selectedProvider?.value
 	);
 
@@ -47,7 +48,7 @@ export const GameListPage = () => {
 					onProviderChange={handleProviderChange}
 				/>
 			</div>
-			<GameList games={searchedAndFilteredGames} loading={loadingGames} />
+			<GameList games={filteredGames} loading={loadingGames} />
 		</div>
 	);
 };
